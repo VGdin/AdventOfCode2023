@@ -1,0 +1,14 @@
+/home/valter/Programs/advent_of_code/AdventOfCode/bin/Debug/net8.0/AdventOfCode
+/home/valter/Programs/advent_of_code/AdventOfCode/bin/Debug/net8.0/AdventOfCode.deps.json
+/home/valter/Programs/advent_of_code/AdventOfCode/bin/Debug/net8.0/AdventOfCode.runtimeconfig.json
+/home/valter/Programs/advent_of_code/AdventOfCode/bin/Debug/net8.0/AdventOfCode.dll
+/home/valter/Programs/advent_of_code/AdventOfCode/bin/Debug/net8.0/AdventOfCode.pdb
+/home/valter/Programs/advent_of_code/AdventOfCode/obj/Debug/net8.0/AdventOfCode.GeneratedMSBuildEditorConfig.editorconfig
+/home/valter/Programs/advent_of_code/AdventOfCode/obj/Debug/net8.0/AdventOfCode.AssemblyInfoInputs.cache
+/home/valter/Programs/advent_of_code/AdventOfCode/obj/Debug/net8.0/AdventOfCode.AssemblyInfo.cs
+/home/valter/Programs/advent_of_code/AdventOfCode/obj/Debug/net8.0/AdventOfCode.csproj.CoreCompileInputs.cache
+/home/valter/Programs/advent_of_code/AdventOfCode/obj/Debug/net8.0/AdventOfCode.dll
+/home/valter/Programs/advent_of_code/AdventOfCode/obj/Debug/net8.0/refint/AdventOfCode.dll
+/home/valter/Programs/advent_of_code/AdventOfCode/obj/Debug/net8.0/AdventOfCode.pdb
+/home/valter/Programs/advent_of_code/AdventOfCode/obj/Debug/net8.0/AdventOfCode.genruntimeconfig.cache
+/home/valter/Programs/advent_of_code/AdventOfCode/obj/Debug/net8.0/ref/AdventOfCode.dll
