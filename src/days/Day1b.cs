@@ -35,13 +35,12 @@ namespace AdventOfCode.src.days
             try
             {
                 string workingDirectory = Environment.CurrentDirectory;
-                string pattern = @"(?:zero|(?=one)on|(?=two)tw|(?=three)thre|four|(?=five)fiv|six|seven|(?=eight)eigh|(?=nine)nin|\d)";
 
                 Solution = File.ReadLines(workingDirectory + "/input/day1.txt")
                     .Select(line => 
                     {
                         string tmp = "";
-                        MatchCollection matches = Regex.Matches(line, pattern);
+                        MatchCollection matches = FindText().Matches(line);
                         foreach (Match match in matches.Cast<Match>())
                         {
                             if (match.Value.Length == 1)
@@ -55,7 +54,7 @@ namespace AdventOfCode.src.days
                         }
                         return tmp;
                     })
-                    .Select(line => MyRegex().Replace(line, ""))
+                    .Select(line => FindNonDigits().Replace(line, ""))
                     .Where(line => !string.IsNullOrEmpty(line))
                     .Sum(line => 
                     {
@@ -71,6 +70,8 @@ namespace AdventOfCode.src.days
         }
 
         [GeneratedRegex(@"\D")]
-        private static partial Regex MyRegex();
+        private static partial Regex FindNonDigits();
+        [GeneratedRegex(@"(?:zero|(?=one)on|(?=two)tw|(?=three)thre|four|(?=five)fiv|six|seven|(?=eight)eigh|(?=nine)nin|\d)")]
+        private static partial Regex FindText();
     }
 }
