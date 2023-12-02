@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode.src.days
 {
-    public partial class Day2a : IDay
+    public partial class Day2b : IDay
     {
         private string _solution = "No Solution";
         public string Solution
@@ -14,30 +14,30 @@ namespace AdventOfCode.src.days
 
         public string Name 
         { 
-            get { return "Day2 - Part 1"; }
+            get { return "Day2 - Part 2"; }
         }
 
-        private static bool ExceedsLimit(string input, string color, int limit)
+        private static int FindLargestNumberForColor(string input, string color)
         {
             return Regex.Matches(input, $@"(\d+)\s+{color}")
-                    .Cast<Match>()
-                    .Any(m => int.Parse(m.Groups[1].Value) > limit);
+                        .Cast<Match>()
+                        .Select(m => int.Parse(m.Groups[1].Value))
+                        .DefaultIfEmpty(0)
+                        .Max();
         }
 
         public void Solve()
         {
-
             try
             {
                 string workingDirectory = Environment.CurrentDirectory;
                 Solution = File.ReadLines(workingDirectory + "/input/day2.txt")
-                    .Where(s => 
-                        !ExceedsLimit(s, "red", 12) && 
-                        !ExceedsLimit(s, "green", 13) &&
-                        !ExceedsLimit(s, "blue", 14))
-                    .Select(s => FindGameNumber().Match(s))
-                    .Where(m => m.Success)
-                    .Sum(m => int.Parse(m.Groups[1].Value))
+                    .Select(s => (
+                            Red: FindLargestNumberForColor(s, "red"),
+                            Green: FindLargestNumberForColor(s, "green"),
+                            Blue: FindLargestNumberForColor(s, "blue")
+                        )) 
+                    .Sum(g => g.Red * g.Green * g.Blue)
                     .ToString();
             }
             catch (Exception ex)
@@ -45,8 +45,5 @@ namespace AdventOfCode.src.days
                 Console.WriteLine("An error occurred: " + ex.Message);
             }
         }
-
-        [GeneratedRegex(@"Game\s+(\d+)")]
-        private static partial Regex FindGameNumber();
     }
 }

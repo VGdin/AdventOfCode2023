@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AdventOfCode.src.days;
+﻿using AdventOfCode.src.days;
 
 class Program
 {
@@ -12,6 +9,7 @@ class Program
             { 1, new Day1a() },
             { 2, new Day1b() },
             { 3, new Day2a() },
+            { 4, new Day2b() },
         };
 
         Console.WriteLine("Which problem do you want to solve?");
