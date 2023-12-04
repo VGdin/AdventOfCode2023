@@ -13,6 +13,7 @@ class Program
             { 5, new Day3a() },
             { 6, new Day3b() },
             { 7, new Day4a() },
+            { 8, new Day4b() },
         };
 
         Console.WriteLine("Which problem do you want to solve?");

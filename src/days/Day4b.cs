@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode.src.days
 {
-    public partial class Day4a : IDay
+    public partial class Day4b : IDay
     {
         private string _solution = "No Solution";
         public string Solution
@@ -14,14 +14,24 @@ namespace AdventOfCode.src.days
 
         public string Name 
         { 
-            get { return "Day4 - Part 1"; }
+            get { return "Day4 - Part 2"; }
         }
-
-        private static int NumbersToPoints(int num)
+        private static List<int> ModifyList(List<int> numbers, List<int> copies, int index)
         {
-            return num <= 0 ? 0 : Enumerable
-                .Repeat(2, num - 1)
-                .Aggregate(1, (a, b) => a * b);
+            if (index >= copies.Count)
+            {
+                return copies;
+            }
+
+            int incrementCount = numbers[index-1];
+            var updatedCopies = copies
+                .Select((n, i) => (i > index &&
+                                   i <= index + incrementCount && 
+                                   i < numbers.Count) ? 
+                                   n + copies[index] : n)
+                .ToList();
+
+            return ModifyList(numbers, updatedCopies, index + 1);
         }
 
         public void Solve()
@@ -29,7 +39,7 @@ namespace AdventOfCode.src.days
             try
             {
                 string workingDirectory = Environment.CurrentDirectory;
-                Solution = File.ReadLines(workingDirectory + "/input/day4.txt")
+                var lists = File.ReadLines(workingDirectory + "/input/day4.txt")
                     .Select(s => 
                         {
                             var slaks = s.Split(':');
@@ -49,14 +59,24 @@ namespace AdventOfCode.src.days
                                     .ToList();
 
                         return (WinningNumbers: winningNumbersList, YouNumbers: youNumbersList);
-                    })
-                    .Sum(ls =>
+                    });
+
+                
+                var winningNumbers = lists 
+                    .Select(ls =>
                     {
-                        var matchingNumbers = ls.WinningNumbers.Count(wn => ls.YouNumbers.Contains(wn));
-                        var points = NumbersToPoints(matchingNumbers);
-                        return points;
+                        return ls.WinningNumbers.Count(wn => ls.YouNumbers.Contains(wn));
                     })
-                    .ToString();
+                    .ToList();
+                
+                List<int> initialCopies = Enumerable
+                    .Repeat(1, winningNumbers.Count + 1)
+                    .ToList();
+                var finalCopies = ModifyList(winningNumbers, initialCopies, 1);
+
+                finalCopies.RemoveAt(0);
+                Solution = finalCopies.Sum().ToString();
+
             }
             catch (Exception ex)
             {
