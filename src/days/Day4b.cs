@@ -27,7 +27,7 @@ namespace AdventOfCode.src.days
             var updatedCopies = copies
                 .Select((n, i) => (i > index &&
                                    i <= index + incrementCount && 
-                                   i < numbers.Count) ? 
+                                   i < copies.Count) ?
                                    n + copies[index] : n)
                 .ToList();
 
@@ -73,8 +73,8 @@ namespace AdventOfCode.src.days
                     .Repeat(1, winningNumbers.Count + 1)
                     .ToList();
                 var finalCopies = ModifyList(winningNumbers, initialCopies, 1);
-
                 finalCopies.RemoveAt(0);
+
                 Solution = finalCopies.Sum().ToString();
 
             }
