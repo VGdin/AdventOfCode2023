@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode.src.days
 {
-    public class Day1a : IDay
+    public partial class Day1a : IDay
     {
         private string _solution = "No Solution";
         public string Solution
@@ -23,7 +23,7 @@ namespace AdventOfCode.src.days
             {
                 string workingDirectory = Environment.CurrentDirectory;
                 Solution = File.ReadLines(workingDirectory + "/input/day1.txt")
-                    .Select(line => Regex.Replace(line, @"\D", ""))
+                    .Select(line => FindNonDigits().Replace(line, ""))
                     .Where(line => !string.IsNullOrEmpty(line))
                     .Sum(line => 
                     {
@@ -37,5 +37,8 @@ namespace AdventOfCode.src.days
                 Console.WriteLine("An error occurred: " + ex.Message);
             }
         }
+
+        [GeneratedRegex(@"\D")]
+        private static partial Regex FindNonDigits();
     }
 }
