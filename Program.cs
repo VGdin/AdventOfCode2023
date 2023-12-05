@@ -15,10 +15,11 @@ class Program
             { 7, new Day4a() },
             { 8, new Day4b() },
             { 9, new Day5a() },
+            { 10, new Day5b() },
         };
 
         Console.WriteLine("Which problem do you want to solve?");
-        days.ToList().ForEach(pair => Console.WriteLine($"\t{pair.Key}) {pair.Value.Name}"));
+        days.ToList().ForEach(pair => Console.WriteLine($"\t{pair.Key})\t{pair.Value.Name}"));
         if (int.TryParse(Console.ReadLine(), out int dayNumber) && days.ContainsKey(dayNumber))
         {
             IDay day = days[dayNumber];
