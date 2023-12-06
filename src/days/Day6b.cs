@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode.src.days
 {
-    public partial class Day6a : IDay
+    public partial class Day6b : IDay
     {
         private string _solution = "No Solution";
         public string Solution
@@ -14,7 +14,7 @@ namespace AdventOfCode.src.days
 
         public string Name 
         { 
-            get { return "Day6 - Part 1"; }
+            get { return "Day6 - Part 2"; }
         }
 
         public void Solve()
@@ -24,41 +24,34 @@ namespace AdventOfCode.src.days
                 string workingDirectory = Environment.CurrentDirectory;
                 string[] lines = File.ReadAllLines(workingDirectory + "/input/day6.txt");
 
-                List<int> time = FindNumber()
+                List<string> times = FindNumber()
                     .Matches(lines[0])
                     .Cast<Match>()
                     .Where(m => m.Success)
-                    .Select(m => int.Parse(m.Groups[1].Value))
+                    .Select(m => m.Groups[1].Value)
                     .ToList();
 
-                List<int> distance = FindNumber()
+                List<string> distances = FindNumber()
                     .Matches(lines[1])
                     .Cast<Match>()
                     .Where(m => m.Success)
-                    .Select(m => int.Parse(m.Groups[1].Value))
+                    .Select(m => m.Groups[1].Value)
                     .ToList();
 
-                List<(int Time, int Distance)> timeAndDistance = time
-                    .Zip(distance, (t, d) => (t,d))
-                    .ToList();
+                long time = long.Parse(string.Concat(times));
+                long distance = long.Parse(string.Concat(distances));
 
-                Solution = timeAndDistance
-                    .Select(td => 
+                int error_margin = 0;
+                for (long i = 1; i<time; i++) // Skip 0 and Max, always will be zero
+                {
+                    long traveled = i * (time-i);
+                    if (traveled > distance)
                     {
-                        int error_margin = 0;
-                        for (int i = 1; i<td.Time; i++) // Skip 0 and Max, always will be zero
-                        {
-                            int traveled = i * (td.Time-i);
-                            if (traveled > td.Distance)
-                            {
-                                error_margin++;
-                            }
-                        }
+                        error_margin++;
+                    }
+                }
 
-                        return error_margin;
-                    })
-                    .Aggregate(1, (acc, em) => acc * em)
-                    .ToString();
+                Solution = error_margin.ToString();
             }
             catch (Exception ex)
             {
